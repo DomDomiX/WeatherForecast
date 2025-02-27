@@ -3,12 +3,14 @@ package com.GUI;
 import javax.swing.*;
 import com.GUI.AddButtonGUI;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AppGUI extends JFrame{
+    private DefaultListModel<String> listModel;
+    private JList<String> placeList;
+
     public AppGUI() {
         //Window setup
         super("WeatherApp");
@@ -16,8 +18,8 @@ public class AppGUI extends JFrame{
         setLayout(new BorderLayout());
 
         //List of places
-        DefaultListModel<String> model = new DefaultListModel<>();
-        JList<String> placeList = new JList<>(model);
+        listModel = new DefaultListModel<>();
+        placeList = new JList<>(listModel);
 
         JScrollPane listScrollPane = new JScrollPane(placeList);
         listScrollPane.setPreferredSize(new Dimension(200, 800));
@@ -26,12 +28,7 @@ public class AppGUI extends JFrame{
         JButton addButton = new JButton();
         addButton.setText("Add Place");
 
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddButtonGUI();
-            }           
-        });
+        addButton.addActionListener(e -> new AddButtonGUI(this)); 
 
         // Left panel for list and button
         JPanel leftPanel = new JPanel();
@@ -57,5 +54,9 @@ public class AppGUI extends JFrame{
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void addPlace(String place) {
+        listModel.addElement(place);
     }
 }

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddButtonGUI extends JFrame {
-    public AddButtonGUI() {
+    public AddButtonGUI(AppGUI mainWindow) {
         super("Add Place");
         setSize(400, 300);
         setLayout(new BorderLayout());
@@ -20,16 +20,23 @@ public class AddButtonGUI extends JFrame {
         list.setPreferredSize(new Dimension(150, 30));
 
         JButton confirm = new JButton();
+        confirm.setText("Confirm");
 
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                list.getSelectedItem();
+                String selectedPlace = (String) list.getSelectedItem();
+
+                if (selectedPlace != null) {
+                    mainWindow.addPlace(selectedPlace);
+                    dispose();
+                }
             }
         });
 
         panel.add(places);
         panel.add(list);
+        panel.add(confirm);
 
         add(panel, BorderLayout.NORTH);
 
