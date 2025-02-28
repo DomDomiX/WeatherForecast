@@ -1,11 +1,10 @@
 package com.GUI;
 
 import javax.swing.*;
-import com.GUI.AddButtonGUI;
+
+import com.example.WeatherAPI;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AppGUI extends JFrame{
     private DefaultListModel<String> listModel;
@@ -45,8 +44,17 @@ public class AppGUI extends JFrame{
         JLabel timeLabel = new JLabel("Time", SwingConstants.CENTER);
         JLabel weatherLabel = new JLabel("Weather", SwingConstants.CENTER);
 
+        JButton refreshButton = new JButton("Update Weather");
+        refreshButton.addActionListener(e -> {
+            //String city = "London"; // Zatím pevně dané, později vybereš z listu
+            String place = placeList.getSelectedValue();
+            String weatherData = WeatherAPI.getWeather(place);
+            weatherLabel.setText(weatherData);
+        });
+
         mainPanel.add(timeLabel);
         mainPanel.add(weatherLabel);
+        mainPanel.add(refreshButton);
 
         // Add components to the window
         add(leftPanel, BorderLayout.WEST);
