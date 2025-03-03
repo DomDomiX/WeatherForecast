@@ -13,7 +13,7 @@ public class AppGUI extends JFrame{
     public AppGUI() {
         //Window setup
         super("WeatherApp");
-        setSize(800, 800);
+        setSize(500, 400);
         setLayout(new BorderLayout());
 
         //List of places
@@ -21,7 +21,7 @@ public class AppGUI extends JFrame{
         placeList = new JList<>(listModel);
 
         JScrollPane listScrollPane = new JScrollPane(placeList);
-        listScrollPane.setPreferredSize(new Dimension(200, 800));
+        listScrollPane.setPreferredSize(new Dimension(120, 100));
 
         //Button
         JButton addButton = new JButton();
@@ -32,7 +32,7 @@ public class AppGUI extends JFrame{
         // Left panel for list and button
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
-        leftPanel.setPreferredSize(new Dimension(200, 800));
+        leftPanel.setPreferredSize(new Dimension(120, 120));
 
         leftPanel.add(listScrollPane, BorderLayout.CENTER);
         leftPanel.add(addButton, BorderLayout.SOUTH); 
@@ -49,7 +49,9 @@ public class AppGUI extends JFrame{
             //String city = "London"; // Zatím pevně dané, později vybereš z listu
             String place = placeList.getSelectedValue();
             String weatherData = WeatherAPI.getWeather(place);
+            String timeData = WeatherAPI.getTime(place);
             weatherLabel.setText(weatherData);
+            timeLabel.setText(timeData);
         });
 
         mainPanel.add(timeLabel);

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 public class AddButtonGUI extends JFrame {
     public AddButtonGUI(AppGUI mainWindow) {
         super("Add Place");
-        setSize(400, 300);
+        setSize(400, 100);
         setLayout(new BorderLayout());
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
